@@ -1,11 +1,9 @@
 <?php
-$user='root';
-$pass='hello';
 
-$dsn='mysql:host=db; dbname=app_db; charset=utf8';
-$pdo=new PDO($dsn, $user, $pass);
+use App\Kernel;
 
-$stmt=$pdo->query('select * from test');
-$row=$stmt->fetch();
+require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 
-print_r($row);
+return function (array $context) {
+    return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
+};
